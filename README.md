@@ -1,4 +1,4 @@
-# URT
+# A Universal Representation Transformer Layer for Few-Shot Image Classification
 
 
 ## Dependencies

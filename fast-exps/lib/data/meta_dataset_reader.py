@@ -143,7 +143,7 @@ class MetaDatasetEpisodeReader(MetaDatasetReader):
             use_bilevel_ontology_list=use_bilevel_ontology_list,
             split=split,
             episode_descr_config = episode_description,
-            image_size=84)
+            image_size=84, shuffle_buffer_size=1000)
 
         iterator = multi_source_pipeline.make_one_shot_iterator()
         return iterator.get_next()
@@ -167,7 +167,7 @@ class MetaDatasetEpisodeReader(MetaDatasetReader):
             use_bilevel_ontology=use_bilevel_ontology,
             split=split,
             episode_descr_config=episode_description,
-            image_size=84)
+            image_size=84, shuffle_buffer_size=1000)
 
         iterator = single_source_pipeline.make_one_shot_iterator()
         return iterator.get_next()
@@ -227,7 +227,7 @@ class MetaDatasetBatchReader(MetaDatasetReader):
         self.specs_dict[split] = dataset_specs
         multi_source_pipeline = pipeline.make_multisource_batch_pipeline(
             dataset_spec_list=dataset_specs, batch_size=self.batch_size,
-            split=split, image_size=84, add_dataset_offset=True)
+            split=split, image_size=84, add_dataset_offset=True, shuffle_buffer_size=1000)
 
         iterator = multi_source_pipeline.make_one_shot_iterator()
         return iterator.get_next()
@@ -237,7 +237,7 @@ class MetaDatasetBatchReader(MetaDatasetReader):
         self.specs_dict[split] = dataset_specs
         multi_source_pipeline = pipeline.make_one_source_batch_pipeline(
             dataset_spec=dataset_specs, batch_size=self.batch_size,
-            split=split, image_size=84)
+            split=split, image_size=84, shuffle_buffer_size=1000)
 
         iterator = multi_source_pipeline.make_one_shot_iterator()
         return iterator.get_next()
